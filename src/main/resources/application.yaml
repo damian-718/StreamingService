@@ -1,3 +1,13 @@
 spring:
   application:
     name: animestream
+
+  # for postgres setup
+  datasource:
+    url: jdbc:postgresql://db:5432/animestream_db   # 'db' is the service name in docker-compose
+    username: animestream_user
+    password: animestream_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
