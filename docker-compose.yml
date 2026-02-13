@@ -1,10 +1,10 @@
 version: "3.9"
 
 services:
-  db: # db service
+  postgres: # postgres service
     image: postgres:16
     container_name: animestream-postgres
-    restart: always
+    #restart: always
     environment:
       POSTGRES_USER: animestream_user
       POSTGRES_PASSWORD: animestream_pass
@@ -17,15 +17,15 @@ services:
   app: # application service
     build: .
     container_name: animestream-app
-    restart: always
+    #restart: always
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/animestream_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/animestream_db
       SPRING_DATASOURCE_USERNAME: animestream_user
       SPRING_DATASOURCE_PASSWORD: animestream_pass
     depends_on:
-      - db
+      - postgres
 
 volumes: # volume mounted for postgres data persistence
   pgdata:

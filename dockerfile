@@ -1,19 +1,14 @@
-# Use official Java 21 image
-FROM eclipse-temurin:21-jdk-jammy
+# Use official OpenJDK
+FROM eclipse-temurin:21-jdk
 
-# Set workdir
+# Set working directory
 WORKDIR /app
 
-# Copy Maven pom.xml and download dependencies first (for caching)
-COPY pom.xml .
-RUN apt-get update && apt-get install -y maven
-RUN mvn dependency:go-offline
+# Copy jar file
+COPY target/animestream-0.0.1-SNAPSHOT.jar app.jar
 
-# Copy source code
-COPY src ./src
+# Expose port
+EXPOSE 8080
 
-# Package the application
-RUN mvn package -DskipTests
-
-# Run the app
-CMD ["java", "-jar", "target/animestream-0.0.1-SNAPSHOT.jar"]
+# Run app
+ENTRYPOINT ["java", "-jar", "app.jar"]

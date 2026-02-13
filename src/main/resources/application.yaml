@@ -4,7 +4,7 @@ spring:
 
   # for postgres setup
   datasource:
-    url: jdbc:postgresql://db:5432/animestream_db   # 'db' is the service name in docker-compose
+    url: jdbc:postgresql://postgres:5432/animestream_db   # 'db' is the service name in docker-compose
     username: animestream_user
     password: animestream_pass
   jpa:
