@@ -34,8 +34,14 @@ public class AnimeController {
         return ResponseEntity.ok(animeService.getAllAnime());
     }
     
+    // ResponseEntity gives more control than just returning a object. HTTP Stus codes beyond just 200 OK. 201 (something was created), 404 etc...
+    // also allows for custom headers. metadata like location of a resource that was created etc...
     @GetMapping("/{id}")
     public ResponseEntity<Anime> getAnime(@PathVariable UUID id) {
+        
+        // String token = authHeader.replace("Bearer ", ""); adding JWT eventually
+        // jwtService.validateToken(token);
+
         return ResponseEntity.ok(animeService.getAnimeById(id));
     }
 
