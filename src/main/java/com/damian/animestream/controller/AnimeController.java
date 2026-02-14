@@ -3,6 +3,8 @@ package com.damian.animestream.controller;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.damian.animestream.model.Anime;
 import com.damian.animestream.service.AnimeService;
 
+import jakarta.validation.Valid;
+
+// seperate controller, this is for CRUD operations
 @RestController
 @RequestMapping("/anime")
 public class AnimeController {
@@ -25,23 +30,26 @@ public class AnimeController {
     }
 
     @GetMapping
-    public List<Anime> getAllAnime() {
-        return animeService.getAllAnime();
+    public ResponseEntity<List<Anime>> getAllAnime() {
+        return ResponseEntity.ok(animeService.getAllAnime());
     }
-
+    
     @GetMapping("/{id}")
-    public Anime getAnime(@PathVariable UUID id) {
-        return animeService.getAnimeById(id);
+    public ResponseEntity<Anime> getAnime(@PathVariable UUID id) {
+        return ResponseEntity.ok(animeService.getAnimeById(id));
     }
 
     // takes in a anime json object and will map it to relative fields of the object and then convert to table row
     @PostMapping
-    public Anime addAnime(@RequestBody Anime anime) {
-        return animeService.saveAnime(anime);
+    public ResponseEntity<Anime> addAnime(@Valid @RequestBody Anime anime) {
+        Anime created = animeService.saveAnime(anime);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAnime(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteAnime(@PathVariable UUID id) {
         animeService.deleteAnime(id);
+        return ResponseEntity.noContent().build();
     }
+
 }
