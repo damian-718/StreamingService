@@ -31,7 +31,7 @@ public class AnimeController {
 
     @GetMapping
     public ResponseEntity<List<Anime>> getAllAnime() {
-        return ResponseEntity.ok(animeService.getAllAnime());
+        return ResponseEntity.ok(animeService.getAllAnime()); // spring automatically converts list of animes into json
     }
     
     // ResponseEntity gives more control than just returning a object. HTTP Stus codes beyond just 200 OK. 201 (something was created), 404 etc...
