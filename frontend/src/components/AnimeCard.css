@@ -1,0 +1,35 @@
+/* === AnimeCard Styling === */
+
+.anime-card {
+    flex: 0 0 220px;
+    /* fixed width */
+
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.anime-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+}
+
+.anime-card h3 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.anime-card p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}

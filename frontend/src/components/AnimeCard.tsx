@@ -1,4 +1,6 @@
 import type { Anime } from "../types/anime";
+import "./AnimeCard.css"
+
 
 interface Props {
     anime: Anime;
@@ -6,8 +8,8 @@ interface Props {
 
 export function AnimeCard({ anime }: Props) {
     return (
-        <div style={{ border: "1px solid #ccc", padding: "1rem", margin: "1rem" }}>
-            <img src={anime.coverUrl} width={150} alt={anime.title} />
+        <div className="anime-card">
+            <img src={anime.coverUrl} alt={anime.title} />
             <h3>{anime.title}</h3>
             <p>⭐ {anime.rating}</p>
             <p>{anime.year}</p>

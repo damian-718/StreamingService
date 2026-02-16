@@ -1,0 +1,50 @@
+/* === AnimeListPage Layout === */
+
+.anime-section {
+    width: 100%;
+    /* take full horizontal space */
+    max-width: none;
+    /* remove any max-width restriction */
+    margin: 2rem 0;
+    /* vertical spacing only */
+    padding: 0 1rem;
+    /* small horizontal padding */
+    box-sizing: border-box;
+    /* ensures padding doesn’t break width */
+}
+
+.anime-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.anime-scroll-container {
+    display: flex;
+    gap: 1rem;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-bottom: 0.5rem;
+
+    scroll-behavior: smooth;
+}
+
+/* Optional subtle scrollbar styling */
+.anime-scroll-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.anime-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+/* Responsive behavior */
+@media (max-width: 900px) {
+    .anime-section {
+        width: 100%;
+        padding: 0 1rem;
+    }
+}
