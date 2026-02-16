@@ -2,6 +2,8 @@ package com.damian.animestream.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Episode {
 
     // tells JPA this is child side of relationship, many episodes to one anime object, the column name is anime_id in the table that stores Animes id.
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "anime_id", nullable = false)
     private Anime anime;
 

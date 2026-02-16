@@ -21,4 +21,13 @@ public class JikanService {
                 .bodyToMono(String.class)
                 .block();
     }
+
+    public String fetchEpisodesRaw(int malId) {
+        return webClient.get()
+                .uri("/anime/{id}/episodes", malId)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+    }
+    
 }

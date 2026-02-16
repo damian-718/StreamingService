@@ -20,7 +20,7 @@ public class AnimeOperationsController {
 
     // why is this POST and not GET? because it will create resources. creating database rows. GET is also idempotent by nature, same request returns same value. This can,however, change state.
     @PostMapping("/import-top") // currently defaults to top 25 (pagination on jikans side)
-    public ResponseEntity<Void> importTopAnime() {
+    public ResponseEntity<Void> importTopAnime() throws InterruptedException {
         animeService.importTopAnime();
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

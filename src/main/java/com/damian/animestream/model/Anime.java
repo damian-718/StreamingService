@@ -6,6 +6,7 @@ import java.util.UUID;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -31,7 +32,7 @@ public class Anime { // no constructor needed, Hibernate creates object via refl
 
     // By default the relationship is "lazy", loading an anime wont load its episodes unless you do getEpisodes which will fetch the list.
     // cascade is so changes propagate. a deletion of an anime also deletes all episodes with the anime_id.
-    @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, orphanRemoval = true) // mapped by tells hibernate this is inverse side of relationship, as in anime refers to a field in the episode class. Episode owns the foreign key (FK) anime_id.
+    @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) // mapped by tells hibernate this is inverse side of relationship, as in anime refers to a field in the episode class. Episode owns the foreign key (FK) anime_id.
     private List<Episode> episodes; // when you getEpisodes, Hibernate will run the query SELECT * FROM episode WHERE anime_id = ?;
 
     // Getters and Setters
