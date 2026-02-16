@@ -24,6 +24,7 @@ public class AnimeService {
         this.jikanService = jikanService;
     }
 
+    
     public void importTopAnime() {
 
         String response = jikanService.fetchTopAnimeRaw();
