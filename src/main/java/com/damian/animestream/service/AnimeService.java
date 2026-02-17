@@ -3,6 +3,8 @@ package com.damian.animestream.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -80,6 +82,10 @@ public class AnimeService {
                 System.out.println("Failed to fetch episodes for anime " + anime.getMalId() + ": " + e.getMessage());
             }
         }
+    }
+
+    public Page<Episode> getEpisodesByAnimeId(UUID animeId, Pageable pageable) {
+        return episodeRepository.findByAnimeIdOrderByNumberAsc(animeId, pageable);
     }
 
     // database calls

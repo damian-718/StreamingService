@@ -1,7 +1,22 @@
 // this file is for api calls
 import type { Anime } from "../types/anime";
+import type { Episode } from "../types/episode";
 
 const API_URL = import.meta.env.VITE_API_URL;
+
+
+export async function fetchAnimeEpisodes(
+    animeId: string,
+    page: number = 0,
+    size: number = 20
+): Promise<{ content: Episode[]; last: boolean }> {
+    const res = await fetch(`${API_URL}/anime/${animeId}/episodes?page=${page}&size=${size}`);
+    if (!res.ok) throw new Error("Failed to fetch episodes");
+
+    // Backend returns a Spring Page object:
+    // { content: Episode[], totalElements, totalPages, last, ... }
+    return res.json();
+}
 
 export async function fetchAllAnime(): Promise<Anime[]> { // backend returns array of anime objects
     const res = await fetch(`${API_URL}/anime`);

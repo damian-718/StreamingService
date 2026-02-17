@@ -1,3 +1,4 @@
+import type { Episode } from "./episode";
 export interface Anime {
     id: string;
     malId: number;
@@ -6,4 +7,5 @@ export interface Anime {
     rating: number;
     year: number;
     coverUrl: string;
+    episodes: Episode[];
 }

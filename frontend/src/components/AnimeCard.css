@@ -1,8 +1,5 @@
-/* === AnimeCard Styling === */
-
 .anime-card {
     flex: 0 0 220px;
-    /* fixed width */
 
     background: white;
     border-radius: 10px;

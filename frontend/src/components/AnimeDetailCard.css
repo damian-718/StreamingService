@@ -1,0 +1,108 @@
+/* Page layout */
+.anime-detail {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #000000;
+}
+
+/* Cover image */
+.anime-detail img {
+    width: 280px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Right side content */
+.anime-detail h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.anime-detail p {
+    margin: 6px 0;
+    line-height: 1.5;
+    color: #000000;
+}
+
+/* Episodes container */
+.episodes {
+    flex: 0 0 220px;
+    margin-top: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Remove list styling */
+.episodes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual episode */
+.episode-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    background: #1c1c1c;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* Hover */
+.episode-item:hover {
+    background: #2a2a2a;
+    transform: translateX(6px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* Button press effect, make it slightly smaller on press */
+.episode-item:active {
+    transform: scale(0.98);
+}
+
+/* Episode number badge */
+.ep-number {
+    font-weight: bold;
+    color: #ff4d6d;
+    min-width: 70px;
+}
+
+/* Title */
+.ep-title {
+    color: #eaeaea;
+    flex: 1;
+}
+
+/* Custom scrollbar (Chrome, Edge, Safari) */
+.episodes::-webkit-scrollbar {
+    width: 8px;
+}
+
+.episodes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.episodes::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.episodes::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* Firefox scrollbar */
+.episodes {
+    scrollbar-width: thin;
+    scrollbar-color: #444 transparent;
+}

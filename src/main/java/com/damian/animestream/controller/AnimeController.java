@@ -3,6 +3,10 @@ package com.damian.animestream.controller;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.damian.animestream.model.Anime;
+import com.damian.animestream.model.Episode;
 import com.damian.animestream.service.AnimeService;
 
 import jakarta.validation.Valid;
@@ -33,6 +39,17 @@ public class AnimeController {
     public ResponseEntity<List<Anime>> getAllAnime() {
         return ResponseEntity.ok(animeService.getAllAnime()); // spring automatically converts list of animes into json
     }
+
+    @GetMapping("/{id}/episodes")
+    public ResponseEntity<Page<Episode>> getEpisodes(
+            @PathVariable UUID id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("number").ascending());  // creates a Pageable
+        Page<Episode> episodesPage = animeService.getEpisodesByAnimeId(id, pageable);
+        return ResponseEntity.ok(episodesPage); // episodesPage is a Page<Episode> object, this returns the content, totalElements (total episodes in DB for this anime, totalPages, size, etc)
+    } // responseentity is a wrapper for HTTP response which springboot will convert into JSON
     
     // ResponseEntity gives more control than just returning a object. HTTP Stus codes beyond just 200 OK. 201 (something was created), 404 etc...
     // also allows for custom headers. metadata like location of a resource that was created etc...
