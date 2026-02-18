@@ -37,3 +37,10 @@ export async function importTopAnime(): Promise<void> {
     });
     if (!res.ok) throw new Error("Failed to import top anime");
 }
+
+// elasticsearch
+export async function searchAnime(query: string): Promise<Anime[]> {
+    const res = await fetch(`${API_URL}/anime/search?q=${encodeURIComponent(query)}`);
+    if (!res.ok) throw new Error("Failed to search anime");
+    return res.json();
+}

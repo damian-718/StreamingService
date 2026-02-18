@@ -1,9 +1,13 @@
 import { useAnime } from "../hooks/useAnime";
 import { AnimeCard } from "../components/AnimeCard";
 import "./AnimeListPage.css";
+import { useSearchAnime } from "../hooks/useSearchAnime";
+import { SearchBar } from "../components/SearchBar";
 
 export function AnimeListPage() {
     const { anime, loading, error } = useAnime(); //triggers the useffect when this component mounts
+    const { results, loading: searchLoading, error: searchError, search } = useSearchAnime();
+    const displayAnime = results.length ? results : anime;
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -14,8 +18,13 @@ export function AnimeListPage() {
     return (
         <div className="anime-section">
             <h2>Popular Anime</h2>
+            <SearchBar onSearch={search} />
+
+            {loading || searchLoading ? <p>Loading...</p> : null}
+            {error || searchError ? <p>Error: {error || searchError}</p> : null}
+
             <div className="anime-scroll-container">
-                {anime.map(a => (
+                {displayAnime.map(a => (
                     <AnimeCard key={a.id} anime={a} />
                 ))}
             </div>

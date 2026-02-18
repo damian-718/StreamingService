@@ -14,6 +14,23 @@ services:
     volumes: # the path where the volume goes
       - pgdata:/var/lib/postgresql/data
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.17
+    container_name: animestream-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false # disable security for dev
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 || exit 1"]
+      interval: 5s
+      retries: 12
+
   app: # application service
     build: .
     container_name: animestream-app
@@ -24,8 +41,13 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/animestream_db
       SPRING_DATASOURCE_USERNAME: animestream_user
       SPRING_DATASOURCE_PASSWORD: animestream_pass
+      SPRING_ELASTICSEARCH_URIS: http://elasticsearch:9200
     depends_on:
-      - postgres
+      elasticsearch:
+        condition: service_healthy
+      postgres:
+        condition: service_started
 
-volumes: # volume mounted for postgres data persistence
+volumes: # volume mounted for postgres data persistence, same for elasticsearch
   pgdata:
+  esdata:
