@@ -26,9 +26,9 @@ public class AnimeSearchService {
         List<AnimeDocument> byEpisode = searchRepo.findByEpisodeTitle(query); // nested episodes
 
         // merge results, remove duplicates
-        Set<AnimeDocument> results = new LinkedHashSet<>();
+        Set<AnimeDocument> results = new LinkedHashSet<>(); // linked hashset is a set that maintains insertion order, so we get title matches first, then episode matches, but no duplicates
         results.addAll(byTitle);
-        results.addAll(byEpisode);
+        results.addAll(byEpisode); // we insert title then episodes, thats how the linkedlist remembers the order
 
         return new ArrayList<>(results);
     }
