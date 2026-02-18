@@ -3,6 +3,7 @@ package com.damian.animestream.model;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+// does not need annotation since nested inside anime document. not a seperate index.
 public class EpisodeDocument {
 
     @Field(type = FieldType.Integer)
