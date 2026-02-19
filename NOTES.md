@@ -36,6 +36,11 @@ ElasticSearch:
 - Elasticsearch flow in this project is: user types search -> searchbar -> GET /anime/search?q=Gintama -> AnimeSearchController -> AnimeSearchService -> AnimeSearchRepository -> Elasticsearch -> string to JSON -> AnimeDocument -> controller returns list of documents -> frontend renders the AnimeCard
     - Document annotations on anime/episode define mapping, then when repo.save() (via syncservice), elasticsearch will create the anime/episode index if it doesnt exist. It will apply the mappings and store it as a document.
 
+JUnit/Mockito:
+
+- JUnit is a testing framework that gives us the @Test annotation on test cases, and asertEquals.
+- Mockito lets us "mock" dependencies. For example, we have a searchservice that makes a database call with the repository class. Mockito can be used on the repository class, to mock it. Where when its calls by the service, intercept it, create a mock return value, then pass it back into the service so the service can do its remaining logic. Mockito will let us simply override that external call, but still do other service logic.
+
 Core entities (rough draft): 
 
 Anime{
