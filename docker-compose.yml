@@ -51,3 +51,7 @@ services:
 volumes: # volume mounted for postgres data persistence, same for elasticsearch
   pgdata:
   esdata:
+
+# docker-compose is a took that allows you to run many containers together and manage them. You can define volumes, environment variables, networking. 
+# dockerfile builds a custom image, you can build your app and copy it into a container along with java runtime, and then run it.
+# dockerfile copies needed files into container, specifies directories and how to run the app.
